@@ -1,0 +1,164 @@
+[
+  {
+    "question": "What is the largest ocean on Earth?",
+    "answers": [
+      { "text": "Pacific Ocean", "correct": true },
+      { "text": "Atlantic Ocean", "correct": false },
+      { "text": "Indian Ocean", "correct": false },
+      { "text": "Arctic Ocean", "correct": false }
+    ]
+  },
+  {
+    "question": "Which planet is known as the 'Blue Planet'?",
+    "answers": [
+      { "text": "Earth", "correct": true },
+      { "text": "Mars", "correct": false },
+      { "text": "Venus", "correct": false },
+      { "text": "Neptune", "correct": false }
+    ]
+  },
+  {
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "answers": [
+      { "text": "William Shakespeare", "correct": true },
+      { "text": "Charles Dickens", "correct": false },
+      { "text": "Mark Twain", "correct": false },
+      { "text": "Jane Austen", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the capital of Japan?",
+    "answers": [
+      { "text": "Tokyo", "correct": true },
+      { "text": "Beijing", "correct": false },
+      { "text": "Seoul", "correct": false },
+      { "text": "Bangkok", "correct": false }
+    ]
+  },
+  {
+    "question": "Which gas do plants absorb from the atmosphere?",
+    "answers": [
+      { "text": "Oxygen", "correct": false },
+      { "text": "Nitrogen", "correct": false },
+      { "text": "Carbon Dioxide", "correct": true },
+      { "text": "Hydrogen", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the smallest prime number?",
+    "answers": [
+      { "text": "0", "correct": false },
+      { "text": "1", "correct": false },
+      { "text": "2", "correct": true },
+      { "text": "3", "correct": false }
+    ]
+  },
+  {
+    "question": "In which continent is Egypt located?",
+    "answers": [
+      { "text": "Asia", "correct": false },
+      { "text": "Europe", "correct": false },
+      { "text": "Africa", "correct": true },
+      { "text": "North America", "correct": false }
+    ]
+  },
+  {
+    "question": "Who painted the Mona Lisa?",
+    "answers": [
+      { "text": "Leonardo da Vinci", "correct": true },
+      { "text": "Vincent Van Gogh", "correct": false },
+      { "text": "Pablo Picasso", "correct": false },
+      { "text": "Claude Monet", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the hardest natural substance on Earth?",
+    "answers": [
+      { "text": "Gold", "correct": false },
+      { "text": "Diamond", "correct": true },
+      { "text": "Iron", "correct": false },
+      { "text": "Quartz", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the main ingredient in guacamole?",
+    "answers": [
+      { "text": "Avocado", "correct": true },
+      { "text": "Tomato", "correct": false },
+      { "text": "Pepper", "correct": false },
+      { "text": "Onion", "correct": false }
+    ]
+  },
+  {
+    "question": "Which is the smallest country in the world?",
+    "answers": [
+      { "text": "Monaco", "correct": false },
+      { "text": "Vatican City", "correct": true },
+      { "text": "San Marino", "correct": false },
+      { "text": "Nauru", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the currency of Japan?",
+    "answers": [
+      { "text": "Yen", "correct": true },
+      { "text": "Won", "correct": false },
+      { "text": "Dollar", "correct": false },
+      { "text": "Pound", "correct": false }
+    ]
+  },
+  {
+    "question": "Which element has the chemical symbol 'O'?",
+    "answers": [
+      { "text": "Gold", "correct": false },
+      { "text": "Oxygen", "correct": true },
+      { "text": "Osmium", "correct": false },
+      { "text": "Oganesson", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the capital of Australia?",
+    "answers": [
+      { "text": "Sydney", "correct": false },
+      { "text": "Canberra", "correct": true },
+      { "text": "Melbourne", "correct": false },
+      { "text": "Brisbane", "correct": false }
+    ]
+  },
+  {
+    "question": "In what year did the Titanic sink?",
+    "answers": [
+      { "text": "1912", "correct": true },
+      { "text": "1914", "correct": false },
+      { "text": "1905", "correct": false },
+      { "text": "1920", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the tallest mountain in the world?",
+    "answers": [
+      { "text": "K2", "correct": false },
+      { "text": "Kangchenjunga", "correct": false },
+      { "text": "Mount Everest", "correct": true },
+      { "text": "Lhotse", "correct": false }
+    ]
+  },
+  {
+    "question": "Which planet is known for its rings?",
+    "answers": [
+      { "text": "Mars", "correct": false },
+      { "text": "Saturn", "correct": true },
+      { "text": "Jupiter", "correct": false },
+      { "text": "Uranus", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the most spoken language in the world?",
+    "answers": [
+      { "text": "Spanish", "correct": false },
+      { "text": "Mandarin Chinese", "correct": true },
+      { "text": "English", "correct": false },
+      { "text": "Hindi", "correct": false }
+    ]
+  }
+]
