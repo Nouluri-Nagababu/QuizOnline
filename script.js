@@ -3,56 +3,53 @@ let currentQuestionIndex = 0;
 let score = 0;
 let answerChecked = false;
 
-const quizContainer = document.getElementById("quiz");
+const quizContainer = document.getElementById("quiz-container");
+const welcomeContainer = document.getElementById("welcome-container");
+const startButton = document.getElementById("start-button");
 const checkButton = document.getElementById("check-button");
 const nextButton = document.getElementById("next-button");
 const resultDisplay = document.getElementById("result");
+const quizElement = document.getElementById("quiz");
 
-// Load questions from the JSON file
+startButton.addEventListener("click", () => {
+  welcomeContainer.style.display = "none"; // Hide welcome screen
+  quizContainer.style.display = "block"; // Show quiz screen
+  loadQuestion();
+});
+
+// Load questions from JSON file
 fetch("questions.json")
   .then((response) => response.json())
   .then((data) => {
     quizData = data;
-    loadQuestion();  // Load the first question once the data is available
   })
   .catch((error) => console.error("Error loading questions:", error));
 
 function loadQuestion() {
-  // Reset the flag for checking answers
-  answerChecked = false;
-
+  answerChecked = false; // Reset for new question
   const currentQuestion = quizData[currentQuestionIndex];
-
-  // If the current question exists, render it
-  if (currentQuestion) {
-    quizContainer.innerHTML = `
-      <h2>${currentQuestion.question}</h2>
-      <label><input type="radio" name="answer" value="a"> ${currentQuestion.a}</label><br>
-      <label><input type="radio" name="answer" value="b"> ${currentQuestion.b}</label><br>
-      <label><input type="radio" name="answer" value="c"> ${currentQuestion.c}</label><br>
-      <label><input type="radio" name="answer" value="d"> ${currentQuestion.d}</label>
-    `;
-  } else {
-    console.error('Current question data is undefined!');
-  }
-
-  nextButton.style.display = "none"; // Hide the Next button initially
+  quizElement.innerHTML = `
+    <h2>${currentQuestion.question}</h2>
+    <label><input type="radio" name="answer" value="a"> ${currentQuestion.a}</label><br>
+    <label><input type="radio" name="answer" value="b"> ${currentQuestion.b}</label><br>
+    <label><input type="radio" name="answer" value="c"> ${currentQuestion.c}</label><br>
+    <label><input type="radio" name="answer" value="d"> ${currentQuestion.d}</label>
+  `;
+  nextButton.style.display = "none"; // Hide Next button initially
 }
 
 function getSelectedAnswer() {
-  // Get the selected radio button value
   const answers = document.querySelectorAll('input[name="answer"]');
   for (const answer of answers) {
     if (answer.checked) {
       return answer.value;
     }
   }
-  return null;  // If no answer is selected, return null
+  return null;
 }
 
 function highlightAnswers(selectedAnswer) {
-  // Highlight the correct/incorrect options based on the user's selection
-  const labels = quizContainer.querySelectorAll("label");
+  const labels = quizElement.querySelectorAll("label");
   labels.forEach((label) => {
     const input = label.querySelector("input");
     if (input.value === quizData[currentQuestionIndex].correct) {
@@ -68,29 +65,27 @@ checkButton.addEventListener("click", () => {
 
   const selectedAnswer = getSelectedAnswer();
   if (selectedAnswer) {
-    highlightAnswers(selectedAnswer);  // Highlight correct/incorrect answers
+    highlightAnswers(selectedAnswer);
     answerChecked = true;
 
     if (selectedAnswer === quizData[currentQuestionIndex].correct) {
-      score++;  // Increment score if the answer is correct
+      score++;
     }
 
-    nextButton.style.display = "block"; // Show the Next button
+    nextButton.style.display = "block"; // Show Next button
   } else {
-    alert("Please select an answer!");  // Alert if no answer is selected
+    alert("Please select an answer!");
   }
 });
 
 nextButton.addEventListener("click", () => {
-  currentQuestionIndex++;  // Move to the next question
-
+  currentQuestionIndex++;
   if (currentQuestionIndex < quizData.length) {
-    loadQuestion();  // Load the next question
+    loadQuestion();
   } else {
-    // End the quiz and display the final result
     resultDisplay.innerHTML = `You scored ${score} out of ${quizData.length}`;
-    quizContainer.style.display = "none";
-    checkButton.style.display = "none"; // Hide the Check Answer button
-    nextButton.style.display = "none"; // Hide the Next button
+    quizElement.style.display = "none";
+    checkButton.style.display = "none"; // Hide Check Answer button
+    nextButton.style.display = "none"; // Hide Next button
   }
 });

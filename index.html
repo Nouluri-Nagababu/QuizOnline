@@ -7,17 +7,22 @@
     <title>Online Quiz</title>
   </head>
   <body>
-    <div class="container">
+    <div id="welcome-container" class="container">
+      <h1>Welcome to Quiz Online</h1>
+      <p>Test your knowledge with our fun quiz! Click the button below to get started.</p>
+      <button id="start-button" class="btn">Start</button>
+    </div>
+
+    <div id="quiz-container" class="container" style="display: none;">
       <h1>Quiz Time!</h1>
       <div id="quiz"></div>
       <div class="btn-container">
         <button id="check-button" class="btn">Check Answer</button>
-        <button id="next-button" class="btn" style="display: none">
-          Next Question
-        </button>
+        <button id="next-button" class="btn" style="display: none;">Next Question</button>
       </div>
       <div id="result" class="result"></div>
     </div>
+    
 
     <script src="script.js"></script>
   </body>
