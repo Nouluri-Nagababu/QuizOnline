@@ -1,102 +1,96 @@
-let questions = [];
+let quizData = [];
 let currentQuestionIndex = 0;
 let score = 0;
+let answerChecked = false;
 
-const welcomeContainer = document.getElementById("welcome-container");
-const quizContainer = document.getElementById("quiz-container");
-const questionContainer = document.getElementById("question-container");
-const questionElement = document.getElementById("question");
-const answerButtonsElement = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
-const resultContainer = document.getElementById("result-container");
-const scoreElement = document.getElementById("score");
-const restartButton = document.getElementById("restart-btn");
-const startButton = document.getElementById("start-btn");
+const quizContainer = document.getElementById("quiz");
+const checkButton = document.getElementById("check-button");
+const nextButton = document.getElementById("next-button");
+const resultDisplay = document.getElementById("result");
 
-startButton.addEventListener("click", startQuiz);
-
-function startQuiz() {
-  welcomeContainer.classList.add("hidden");
-  quizContainer.classList.remove("hidden");
-  currentQuestionIndex = 0;
-  score = 0;
-  showQuestion(questions[currentQuestionIndex]);
-}
-
-function showQuestion(question) {
-  questionElement.innerText = question.question;
-  answerButtonsElement.innerHTML = "";
-  document.getElementById("question-number").innerText = `Question ${
-    currentQuestionIndex + 1
-  } of ${questions.length}`;
-
-  question.answers.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    button.classList.add("btn");
-    button.addEventListener("click", () => selectAnswer(answer, button));
-    answerButtonsElement.appendChild(button);
-  });
-}
-
-function selectAnswer(answer, button) {
-  const correctAnswer = answer.correct;
-
-  if (correctAnswer) {
-    button.classList.add("correct");
-    score++;
-  } else {
-    button.classList.add("incorrect");
-    highlightCorrectAnswer();
-  }
-
-  Array.from(answerButtonsElement.children).forEach((btn) => {
-    btn.disabled = true;
-  });
-
-  nextButton.classList.remove("hidden");
-}
-
-function highlightCorrectAnswer() {
-  const correctAnswer = questions[currentQuestionIndex].answers.find(
-    (ans) => ans.correct
-  );
-  const correctButton = Array.from(answerButtonsElement.children).find(
-    (btn) => btn.innerText === correctAnswer.text
-  );
-  if (correctButton) {
-    correctButton.classList.add("correct");
-  }
-}
-
-function showNextQuestion() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    showQuestion(questions[currentQuestionIndex]);
-    nextButton.classList.add("hidden");
-  } else {
-    showScore();
-  }
-}
-
-function showScore() {
-  quizContainer.classList.add("hidden");
-  resultContainer.classList.remove("hidden");
-  nextButton.classList.add("hidden");
-  scoreElement.innerText = `${score} / ${questions.length}`;
-}
-
-function restartQuiz() {
-  startQuiz();
-}
-
-nextButton.addEventListener("click", showNextQuestion);
-restartButton.addEventListener("click", restartQuiz);
-
-// Fetch the questions from the file
+// Load questions from the JSON file
 fetch("questions.json")
   .then((response) => response.json())
   .then((data) => {
-    questions = data;
+    quizData = data;
+    loadQuestion();  // Load the first question once the data is available
   })
   .catch((error) => console.error("Error loading questions:", error));
+
+function loadQuestion() {
+  // Reset the flag for checking answers
+  answerChecked = false;
+
+  const currentQuestion = quizData[currentQuestionIndex];
+
+  // If the current question exists, render it
+  if (currentQuestion) {
+    quizContainer.innerHTML = `
+      <h2>${currentQuestion.question}</h2>
+      <label><input type="radio" name="answer" value="a"> ${currentQuestion.a}</label><br>
+      <label><input type="radio" name="answer" value="b"> ${currentQuestion.b}</label><br>
+      <label><input type="radio" name="answer" value="c"> ${currentQuestion.c}</label><br>
+      <label><input type="radio" name="answer" value="d"> ${currentQuestion.d}</label>
+    `;
+  } else {
+    console.error('Current question data is undefined!');
+  }
+
+  nextButton.style.display = "none"; // Hide the Next button initially
+}
+
+function getSelectedAnswer() {
+  // Get the selected radio button value
+  const answers = document.querySelectorAll('input[name="answer"]');
+  for (const answer of answers) {
+    if (answer.checked) {
+      return answer.value;
+    }
+  }
+  return null;  // If no answer is selected, return null
+}
+
+function highlightAnswers(selectedAnswer) {
+  // Highlight the correct/incorrect options based on the user's selection
+  const labels = quizContainer.querySelectorAll("label");
+  labels.forEach((label) => {
+    const input = label.querySelector("input");
+    if (input.value === quizData[currentQuestionIndex].correct) {
+      label.classList.add("correct");
+    } else if (input.value === selectedAnswer) {
+      label.classList.add("incorrect");
+    }
+  });
+}
+
+checkButton.addEventListener("click", () => {
+  if (answerChecked) return; // Prevent checking the answer again
+
+  const selectedAnswer = getSelectedAnswer();
+  if (selectedAnswer) {
+    highlightAnswers(selectedAnswer);  // Highlight correct/incorrect answers
+    answerChecked = true;
+
+    if (selectedAnswer === quizData[currentQuestionIndex].correct) {
+      score++;  // Increment score if the answer is correct
+    }
+
+    nextButton.style.display = "block"; // Show the Next button
+  } else {
+    alert("Please select an answer!");  // Alert if no answer is selected
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++;  // Move to the next question
+
+  if (currentQuestionIndex < quizData.length) {
+    loadQuestion();  // Load the next question
+  } else {
+    // End the quiz and display the final result
+    resultDisplay.innerHTML = `You scored ${score} out of ${quizData.length}`;
+    quizContainer.style.display = "none";
+    checkButton.style.display = "none"; // Hide the Check Answer button
+    nextButton.style.display = "none"; // Hide the Next button
+  }
+});

@@ -3,31 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Quiz App</title>
     <link rel="stylesheet" href="style.css" />
+    <title>Online Quiz</title>
   </head>
   <body>
-    <div class="quiz-container hidden" id="quiz-container">
-      <h1>Quiz App</h1>
-      <div id="question-number"></div>
-      <div id="question">Question text</div>
-      <div id="answer-buttons" class="btn-container">
-        <!-- Answer buttons will be generated dynamically -->
+    <div class="container">
+      <h1>Quiz Time!</h1>
+      <div id="quiz"></div>
+      <div class="btn-container">
+        <button id="check-button" class="btn">Check Answer</button>
+        <button id="next-button" class="btn" style="display: none">
+          Next Question
+        </button>
       </div>
-      <button id="next-btn" class="btn hidden">Next</button>
-      <div id="result-container" class="hidden">
-        <h2>Your Score: <span id="score"></span></h2>
-        <button id="restart-btn" class="btn">Restart Quiz</button>
-      </div>
-    </div>
-
-    <div class="welcome-container" id="welcome-container">
-      <h1>Welcome to Quiz Online</h1>
-      <p>
-        Test your knowledge with our fun quiz! Click the button below to get
-        started.
-      </p>
-      <button id="start-btn" class="btn">Start</button>
+      <div id="result" class="result"></div>
     </div>
 
     <script src="script.js"></script>
